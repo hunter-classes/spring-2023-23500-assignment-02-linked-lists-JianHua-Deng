@@ -8,7 +8,7 @@ List::List(){
 
 List::~List(){
   while(head->getNext() != nullptr){
-    //since walker is always one being head
+    //since walker is always one behind head
     Node *walker = head;
     head = head->getNext();
     delete walker;
