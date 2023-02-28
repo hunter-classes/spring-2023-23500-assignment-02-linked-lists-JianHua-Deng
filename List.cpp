@@ -93,10 +93,10 @@ bool List::remove(int loc){
   if(trailer == nullptr){
     trailer = head;// make the trailer to be the 1st element 
     head = walker->getNext();// make head equals to the second element
-    delete trailer; //delete the trailer node as it has now became the first element, and we are tryin to remove it
+    delete trailer; //delete the trailer node as it has now became the first element, delete it to free up memory
     return true;
   }else{
-    trailer->setNext(walker->getNext());
+    trailer->setNext(walker->getNext());// since the trailer node is a element behind the walker node, we set trailer's next = to walker's next, then remove it
     delete walker;
     return true;
   }
