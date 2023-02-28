@@ -28,4 +28,6 @@ int main()
   l->remove(2);
   std::cout << l->toString() << " " << l->length() << "\n";
   return 0;
+
+  
 }
