@@ -9,7 +9,7 @@ List::List(){
 List::~List(){
   while(head->getNext() != nullptr){
     //since walker is always one being head
-    Node *walker = head
+    Node *walker = head;
     head = head->getNext();
     delete walker;
   }
