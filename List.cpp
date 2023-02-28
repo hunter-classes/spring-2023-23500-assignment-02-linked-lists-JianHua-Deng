@@ -72,8 +72,35 @@ bool List::contains(std::string item){
   return false;
 }//end contains function
 
+
 bool List::remove(int loc){
+  Node *walker = head;
+  Node *trailer = nullptr;
+
   
+  while(loc > 0 && walker != nullptr){
+    loc =- 1;
+    trailer = walker;
+    walker = walker->getNext();
+  }
+
+  if(loc > 0){
+    throw std::out_of_range("Our insert is out of range");
+  }
+
+  //Node *newnode = new Node();
+  //check if trailer is nullptr, if yes, then this mean it is asking to remove element at the index of 0
+  if(trailer == nullptr){
+    trailer = head;// make the trailer to be the 1st element 
+    head = walker->getNext();// make head equals to the second element
+    delete trailer; //delete the trailer node as it has now became the first element, and we are tryin to remove it
+    return true;
+  }else{
+    trailer->setNext(walker->getNext());
+    delete walker;
+    return true;
+  }
+  return false;
 }
 
 /*

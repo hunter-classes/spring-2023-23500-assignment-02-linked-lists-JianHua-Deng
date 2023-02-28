@@ -22,5 +22,10 @@ int main()
   std::cout << l->toString() << " " << l->length() << "\n";
   std::cout << "Did it contain b?" << "\n" << l->contains("b") << "\n";
   std::cout << "Did it contain v?" << "\n" << l->contains("v") << "\n";
+
+  l->remove(0);
+  std::cout << l->toString() << " " << l->length() << "\n";
+  l->remove(2);
+  std::cout << l->toString() << " " << l->length() << "\n";
   return 0;
 }
