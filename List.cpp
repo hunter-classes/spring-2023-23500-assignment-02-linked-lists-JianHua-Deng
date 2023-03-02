@@ -13,8 +13,7 @@ List::~List(){
     head = head->getNext();
     delete walker;
   }
-  delete head;
-
+  std::cout << "deleted" << "\n";
 
 }
 

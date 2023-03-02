@@ -27,6 +27,9 @@ int main()
   std::cout << l->toString() << " " << l->length() << "\n";
   l->remove(2);
   std::cout << l->toString() << " " << l->length() << "\n";
+  std::cout << l->remove(10) << "\n";
+  std::cout << l->toString() << " " << l->length() << "\n";
+  delete l;
   return 0;
 
   
