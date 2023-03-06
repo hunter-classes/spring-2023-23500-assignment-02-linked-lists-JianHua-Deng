@@ -42,7 +42,8 @@ int main()
   olist->insert("11");
   std::cout << olist->toString() << " " << olist->length() << "\n";
   std::cout << olist->get(2) << "\n";
-  std::cout << olist->get(5) << "\n";
+  olist->reverse();
+  std::cout << olist->toString() << " " << olist->length() << "\n";
 
   return 0;
 

@@ -50,8 +50,18 @@ void OList::insert(std::string data){
 
 }//end of insert
 
-void OList::List reverse(){
-  
+void OList::reverse(){
+  Node *walker, *trailer, *tmp;
+  tmp = nullptr;
+  trailer = nullptr;
+  walker = head;
+  while(walker != nullptr){
+    tmp = walker->getNext();//store walker's next to a tmp *variable
+    walker->setNext(trailer);//since trailer is one behind walker, set walker's next = trailer
+    trailer = walker;
+    walker = tmp;
+  }
+  head = trailer;//set the head node equals to trailer, since trailer right now is the last node, while walker being nullptr
 }
 
 
@@ -62,7 +72,7 @@ std::string OList::get(int loc){
     walker = walker->getNext();
   }
 
-  if(walker == nullptr){
+  if(walker == nullptr){ 
     return "Nullptr, out of range";
   }else{
     return walker->getData();
