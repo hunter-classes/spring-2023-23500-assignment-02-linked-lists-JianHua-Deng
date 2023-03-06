@@ -13,6 +13,7 @@ class OList{
   bool contains(std::string value);
   bool remove(int loc);
   int length();
+  std::string get(int loc);
 
   std::string toString(); // for testing purposes
 

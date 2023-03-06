@@ -54,7 +54,21 @@ void OList::insert(std::string data){
 }//end of insert
 
 
+std::string OList::get(int loc){
+  Node *walker = head;
+  while(walker != nullptr && loc > 0){
+    loc = loc - 1;
+    walker = walker->getNext();
+  }
 
+  if(walker == nullptr){
+    return "Nullptr, out of range";
+  }else{
+    return walker->getData();
+  }
+
+
+}//end get function
 
 
 
