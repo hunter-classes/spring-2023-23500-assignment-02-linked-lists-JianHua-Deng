@@ -34,12 +34,14 @@ int main()
   delete l;
   */
 
-  OList *olist = new OList();
+  OList *olist = new OList();//7 7 8 10 11
   olist->insert("10");
   olist->insert("7");
   olist->insert("7");
   olist->insert("8");
   olist->insert("11");
+  olist->remove(4);
+  std::cout << olist->contains("11") << "\n";
   std::cout << olist->toString() << " " << olist->length() << "\n";
   std::cout << olist->get(2) << "\n";
   olist->reverse();

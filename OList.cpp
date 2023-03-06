@@ -114,21 +114,22 @@ bool OList::remove(int loc){
 
   
   while(loc > 0 && walker != nullptr){
-    loc =- 1;
+    loc = loc - 1;
     trailer = walker;
     walker = walker->getNext();
   }
 
-  if(loc > 0){
-    throw std::out_of_range("Our insert is out of range");
+  if(walker == nullptr){
+    throw std::out_of_range("Insert is out of range");
   }
+
+  
 
   //Node *newnode = new Node();
   //check if trailer is nullptr, if yes, then this mean it is asking to remove element at the index of 0
   if(trailer == nullptr){
-    trailer = head;// make the trailer to be the 1st element 
-    head = walker->getNext();// make head equals to the second element
-    delete trailer; //delete the trailer node as it has now became the first element, delete it to free up memory
+    head = walker->getNext();
+    delete walker;
     return true;
   }else{
     trailer->setNext(walker->getNext());// since the trailer node is a element behind the walker node, we set trailer's next = to walker's next, then remove it
