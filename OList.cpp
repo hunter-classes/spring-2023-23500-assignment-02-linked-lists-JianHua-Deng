@@ -48,10 +48,11 @@ void OList::insert(std::string data){
 
   }
 
-
-
-
 }//end of insert
+
+void OList::List reverse(){
+  
+}
 
 
 std::string OList::get(int loc){
