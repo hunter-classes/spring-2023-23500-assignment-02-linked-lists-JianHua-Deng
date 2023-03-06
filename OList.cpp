@@ -1,28 +1,65 @@
 #include <iostream>
 #include "Node.h"
-#include "List.h"
+#include "OList.h"
 
-List::List(){
+OList::OList(){
   head = nullptr;
 }
 
-List::~List(){
-  while(head->getNext() != nullptr){
-    //since walker is always one behind the head node
-    Node *walker = head;
-    head = head->getNext();
-    delete walker;
+OList::~OList(){
+  std::cerr << "Calling the destructor\n";
+  Node *walker = head;
+  Node *trailer = nullptr;
+  while (walker != nullptr){
+    trailer=  walker;
+    walker = walker->getNext();
+    std::cerr << "Deleting " << trailer->getData() << ", ";
+    delete trailer;
   }
-  std::cout << "deleted" << "\n";
-
+  std::cerr << "\n";
+  
+  
 }
 
 // insert at the "front" (head)
-void List::insert(std::string data){
-  Node *tmp = new Node(data);
-  tmp->setNext(head);
-  head = tmp;
-}
+void OList::insert(std::string data){
+  Node *newNode = new Node(data);
+  //std::cout << "It ran me " << newNode->getData() << "\n";
+  if(head == nullptr){
+    head = newNode;
+  }else{
+
+    Node *trailer, *walker;
+    walker = head;
+    trailer = nullptr;
+    
+    while(walker != nullptr && std::stoi(walker->getData()) < std::stoi(newNode->getData())){
+      trailer = walker;
+      walker = walker->getNext();
+    }
+    //if none of them are smaller the new insert data, then insert at end
+    if(trailer == nullptr){
+      newNode->setNext(head);
+      head = newNode;
+    }else{
+      trailer->setNext(newNode);
+      newNode->setNext(walker);
+    }
+
+  }
+
+
+
+
+}//end of insert
+
+
+
+
+
+
+
+
 
 /*
   insert at loc
@@ -31,51 +68,13 @@ void List::insert(std::string data){
 
   Piggybacking 
  */
-void List::insert(int loc, std::string data){
-  Node *walker, *trailer;
-  walker = this->head; // start of the list
-  trailer = nullptr; // one behind
-  
-  while(loc>0 && walker != nullptr){
-    loc=loc-1;
-
-    /* trailer will always be one node
-       behind walker */
-    trailer=walker;
-    walker = walker->getNext();
-    
-  }
-
-  // At this point, trailer points to the Node
-  // BEFORE where we want to insert
 
 
-  // test to see if we're trying to
-  // insert past the end 
-  if (loc > 0){
-    // do something to indicate this is invalid
-    throw std::out_of_range("Our insert is out of range");
-  }
-
-  Node *newNode = new Node(data);
-  // Inserting at true location 0
-  // will have trailer == nullptr
-  // - we have to treat that as a special case
-  if (trailer == nullptr){
-    newNode->setNext(head);
-    head = newNode;
-  } else {
-    // do the regular case 
-    newNode->setNext(walker);
-    trailer->setNext(newNode);
-  }
-}
-
-bool List::contains(std::string item){
+bool OList::contains(std::string value){
   Node *walker = head;
 
   while(walker != nullptr){
-    if(walker->getData() == item){
+    if(walker->getData() == value){
       return true;
     }
     walker = walker->getNext();
@@ -84,7 +83,7 @@ bool List::contains(std::string item){
 }//end contains function
 
 
-bool List::remove(int loc){
+bool OList::remove(int loc){
   Node *walker = head;
   Node *trailer = nullptr;
 
@@ -122,7 +121,7 @@ bool List::remove(int loc){
     Change all the insert/delete/remove type
     routines to upate that variable 
  */
-int List::length(){
+int OList::length(){
   int count = 0;
   Node *walker = head;
   while (walker != nullptr){
@@ -134,7 +133,7 @@ int List::length(){
 
 
 
-std::string List::toString(){
+std::string OList::toString(){
   Node *tmp = this->head;
   std::string result = "";
   while (tmp != nullptr){
